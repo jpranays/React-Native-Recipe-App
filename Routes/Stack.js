@@ -14,6 +14,11 @@ const Screens = {
 	},
 	Recipe: {
 		screen: Recipe,
+		navigationOptions:({navigation})=>{
+			return {
+				title:navigation.state.params.title || "Recipe"
+			}
+		}
 	},
 };
 const Stack = createStackNavigator(Screens);

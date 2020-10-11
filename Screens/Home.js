@@ -10,6 +10,7 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import GlobalStyles from "../Shared/globalStyles"
 function Home({ navigation }) {
 	const [query, setQuery] = useState(() => "chicken");
 	const [items, fetchItems] = useState(() => []);
@@ -18,49 +19,33 @@ function Home({ navigation }) {
 	
 	useEffect(() => {
 		async function fetchData() {
-			let Api_Key = "4f178338bbff31ecef9be50fad3fc7ad";
-			let Api_ID = "f90763b9";
 			const response = await fetch(
-				`https://api.edamam.com/search?q=${query||"chicken"}&app_id=${Api_ID}&app_key=${Api_Key}`
+				`https://api.edamam.com/search?q=${query || "chicken" }&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}`
 			);
 			const data = await response.json();
 			fetchItems(data.hits.filter((arr, index) => (index > 8 ? false : true)));
 			setError(() => false);
 		}
-		fetchData().catch((err) => {
+		fetchData().catch(() => {
 			setError(() => true);
 		});
 	}, [loadStatus]);
 	return (
-		<View style={{height:"100%",backgroundColor:"white"}}>
-			<ImageBackground source={require("../assets/backImage.jpg")} style={{position:"absolute",height:"100%",width:"100%",opacity:0.1}} />
+		<View style={GlobalStyles.Home}>
+			<ImageBackground source={require("../assets/backImage.jpg")} style={GlobalStyles.HomeBackImage} />
 			<Modal visible={error} 
 			animationType="slide"
 			>
 				<View
-					style={{
-						flex: 1,
-						justifyContent: "center",
-						alignItems: "center",
-					}}
+					style={GlobalStyles.Modal}
 				>
 					<Text
-						style={{
-							fontSize: 30,
-							fontWeight: "bold",
-							textAlign: "center",
-							color: "crimson",
-						}}
+						style={GlobalStyles.ModalText}
 					>
 						An Error Occured
 					</Text>
 					<Text
-						style={{
-							fontSize: 30,
-							fontWeight: "bold",
-							textAlign: "center",
-							color: "crimson",
-						}}
+						style={GlobalStyles.ModalText}
 					>
 				 Check You Internet Connection or Try Again Later.
 					</Text>
@@ -71,35 +56,19 @@ function Home({ navigation }) {
 						}}
 						size={50}
 						color="red"
-						style={{
-							position:"absolute",
-							top:10,
-							right:0
-						}}
+						style={GlobalStyles.ModalCloseIcon}
 					/>
 				</View>
 			</Modal>
 			<View
-				style={{
-					width: "100%",
-					justifyContent: "center",
-					flexDirection: "row",
-					marginTop: 10,
-				}}
+				style={GlobalStyles.Form}
 			>
 				<TextInput
 					keyboardType="web-search"
 					onSubmitEditing={() => {
 						setLoadingStatus((prevStatus) => !prevStatus);
 					}}
-					style={{
-						borderBottomWidth: 3,
-						width: "50%",
-						textAlign: "center",
-						fontSize: 20,
-						paddingBottom: 5,
-						borderBottomColor: "green",
-					}}
+					style={GlobalStyles.TextInput}
 					value={query}
 					onChangeText={(value) => {
 						setQuery(value);
@@ -110,14 +79,10 @@ function Home({ navigation }) {
 				<FlatList
 					data={items}
 					numColumns="3"
-					style={{
-						marginTop: 20,
-					}}
-					contentContainerStyle={{
-						justifyContent: "center",
-						alignItems: "center",
-						marginBottom: 20,
-					}}
+					style={
+						GlobalStyles.FlatList
+					}
+					contentContainerStyle={GlobalStyles.FlatListContent}
 					
 					renderItem={({
 						item: {
@@ -131,38 +96,18 @@ function Home({ navigation }) {
 							}}
 						>
 							<View
-								style={{
-									margin: 10,
-								}}
+								style={GlobalStyles.FlatListRecipe}
 							>
 								<Text
-									style={{
-										backgroundColor: "yellow",
-										padding: 5,
-										borderRadius: 10,
-										marginBottom: 5,
-										width: 100,
-										fontSize: 15,
-										textAlign: "center",
-										elevation:6,
-									shadowOffset:{width:5,height:5},
-									shadowColor:"grey",
-									}}
+									style={GlobalStyles.FlatListLabel}
 								>
 									{label}
 								</Text>
 								<View 
-								style={{
-									elevation:6
-								}}
 								> 
 								<Image
 									source={{ uri: image }}
-									style={{
-										width: 100,
-										height: 100,
-										borderRadius: 10,
-									}}
+									style={GlobalStyles.FlatListImage}
 								/>
 
 								</View>

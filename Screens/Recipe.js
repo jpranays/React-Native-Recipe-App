@@ -1,48 +1,25 @@
 import React from "react";
 import { View, Text,ImageBackground, FlatList, Button, Linking } from "react-native";
-function Recipe({ navigation:{state:{params:{title,image,ingredientLines,url}}}}) {
+import GlobalStyles from "../Shared/globalStyles"
+function Recipe({ navigation:{state:{params:{image,ingredientLines,url}}}}) {
 	return (
      <View  
-	 style={{
-		 height:"100%"
-	 }}
+	 style={GlobalStyles.Recipe}
 	 >
-		<ImageBackground source={{uri:image}}  style={{
-			width:"100%",height:"100%",
-			opacity:0.5,
-			position:"absolute"
-		}} />
-		   <Text style={{
-			   fontSize:35,
-			   textAlign:"left",
-			   margin:10,
-			   fontWeight:"bold"
-			    
-		   }}>Ingredients : </Text>
+		<ImageBackground source={{uri:image}}  style={GlobalStyles.RecipeBackImage} />
+		   <Text style={GlobalStyles.RecipeIngredients}>Ingredients : </Text>
            <FlatList 
 	
 		   data={ingredientLines} renderItem={({item})=>{
-			   return (<Text style={{
-				   padding:5,
-				   margin:5,
-                   fontSize:20,
-				   fontFamily:"sans-serif"
-			   }}>{item}</Text>)
+			   return (<Text style={GlobalStyles.RecipeIngredientLists}>{item}</Text>)
 		   }} 
 		   keyExtractor={(item, key) => key.toString(6)}		   
 		     />
 			 <View
-			 style={{
-				 alignItems:"center",
-				 justifyContent:"center"
-			 }}
+			 style={GlobalStyles.RecipeButtonContainer}
 			 >
 			 <View
-			 style={{
-				width:"50%",
-				marginBottom:10,
-				elevation:6
-			 }}
+			 style={GlobalStyles.RecipeButton}
 			 >
 			 <Button title="Open Full Recipe in Browser" onPress={()=>{
 				 Linking.openURL(url)

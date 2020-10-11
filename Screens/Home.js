@@ -4,9 +4,9 @@ import {
 	Text,
 	TextInput,
 	Modal,
-	Button,
 	Image,
 	FlatList,
+	ImageBackground,
 	TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -15,28 +15,25 @@ function Home({ navigation }) {
 	const [items, fetchItems] = useState(() => []);
 	const [loadStatus, setLoadingStatus] = useState(() => 0);
 	const [error, setError] = useState(() => false);
-	// useEffect(() => {
-
-	// }, []);
+	
 	useEffect(() => {
 		async function fetchData() {
 			let Api_Key = "4f178338bbff31ecef9be50fad3fc7ad";
 			let Api_ID = "f90763b9";
 			const response = await fetch(
-				`https://api.edamam.com/search?q=${query}&app_id=${Api_ID}&app_key=${Api_Key}`
+				`https://api.edamam.com/search?q=${query||"chicken"}&app_id=${Api_ID}&app_key=${Api_Key}`
 			);
 			const data = await response.json();
 			fetchItems(data.hits.filter((arr, index) => (index > 8 ? false : true)));
-			console.log(data.hits)
 			setError(() => false);
-			// setQuery("");
 		}
 		fetchData().catch((err) => {
 			setError(() => true);
 		});
 	}, [loadStatus]);
 	return (
-		<View style={{height:"100%"}}>
+		<View style={{height:"100%",backgroundColor:"white"}}>
+			<ImageBackground source={require("../assets/backImage.jpg")} style={{position:"absolute",height:"100%",width:"100%",opacity:0.1}} />
 			<Modal visible={error} 
 			animationType="slide"
 			>
@@ -56,6 +53,16 @@ function Home({ navigation }) {
 						}}
 					>
 						An Error Occured
+					</Text>
+					<Text
+						style={{
+							fontSize: 30,
+							fontWeight: "bold",
+							textAlign: "center",
+							color: "crimson",
+						}}
+					>
+				 Check You Internet Connection or Try Again Later.
 					</Text>
 					<MaterialIcons
 						name="close"

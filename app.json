@@ -4,9 +4,9 @@
     "slug": "recipe-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconHamburger.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashIcon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

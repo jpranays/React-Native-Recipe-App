@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text,Image,ImageBackground, FlatList, Button, Linking } from "react-native";
+import { View, Text,ImageBackground, FlatList, Button, Linking } from "react-native";
 function Recipe({ navigation:{state:{params:{title,image,ingredientLines,url}}}}) {
-	// console.log(ingredientLines)
 	return (
      <View  
 	 style={{
@@ -23,12 +22,11 @@ function Recipe({ navigation:{state:{params:{title,image,ingredientLines,url}}}}
            <FlatList 
 	
 		   data={ingredientLines} renderItem={({item})=>{
-			   console.log(item)
 			   return (<Text style={{
 				   padding:5,
 				   margin:5,
                    fontSize:20,
-				   fontWeight:"bold"
+				   fontFamily:"sans-serif"
 			   }}>{item}</Text>)
 		   }} 
 		   keyExtractor={(item, key) => key.toString(6)}		   
@@ -50,7 +48,6 @@ function Recipe({ navigation:{state:{params:{title,image,ingredientLines,url}}}}
 				 Linking.openURL(url)
 			 }}
 			 color="green" 
-				 
 			 />
 			 </View>
 			 </View>

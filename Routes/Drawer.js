@@ -9,9 +9,17 @@ const Screens = {
 	},
 	About: {
 		screen: AboutStack,
+		
 	},
 };
 
-const Drawer = createDrawerNavigator(Screens);
+const Drawer = createDrawerNavigator(Screens,{
+	drawerBackgroundColor:"white",
+	contentOptions:{
+		activeTintColor:"orange",
+		activeBackgroundColor:"green",
+		inactiveTintColor:"black"
+	}
+});
 
 export default createAppContainer(Drawer);

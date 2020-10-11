@@ -11,6 +11,7 @@ function Header({ title, navigation }) {
 				justifyContent: "center",
 				alignItems: "center",
 				flex: 1,
+				
 			}}
 		>
 			<MaterialIcons
@@ -18,7 +19,8 @@ function Header({ title, navigation }) {
 				onPress={() => {
 					navigation.openDrawer();
 				}}
-				size={30}
+				size={35}
+				color="white"
 				style={{
 					marginRight: "auto",
 				}}
@@ -27,6 +29,7 @@ function Header({ title, navigation }) {
 				style={{
 					fontSize: 30,
 					position: "absolute",
+					color:"white",
 				}}
 			>
 				{title}

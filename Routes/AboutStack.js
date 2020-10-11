@@ -9,9 +9,26 @@ const Screens = {
 		navigationOptions: ({ navigation }) => {
 			return {
 				headerTitle: () => <Header title="About" navigation={navigation} />,
+				headerStyle:{
+					backgroundColor:"orange",
+				},
+				headerTintColor:"white",
+	
 			};
 		},
 	},
 };
+// const Screens = {
+// 	About: {
+// 		screen: About,
+// 		navigationOptions: {
+// 			title:"About",
+// 			headerStyle:{
+// 				backgroundColor:"orange",
+// 			},
+// 			headerTintColor:"white",
+// 		},
+// 	},
+// };
 const AboutStack = createStackNavigator(Screens);
 export default AboutStack;

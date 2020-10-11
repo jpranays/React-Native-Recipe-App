@@ -9,6 +9,11 @@ const Screens = {
 		navigationOptions: ({ navigation }) => {
 			return {
 				headerTitle: () => <Header title="Home" navigation={navigation} />,
+				headerStyle:{
+					backgroundColor:"orange",
+				},
+				headerTintColor:"white",
+	
 			};
 		},
 	},
@@ -16,7 +21,13 @@ const Screens = {
 		screen: Recipe,
 		navigationOptions:({navigation})=>{
 			return {
-				title:navigation.state.params.title || "Recipe"
+				title:navigation.state.params.title || "Recipe",
+				headerStyle:{
+					backgroundColor:"green",
+					opacity:0.8
+				},
+				headerTintColor:"white",
+
 			}
 		}
 	},

@@ -19,14 +19,15 @@ function Home({ navigation }) {
 	
 	useEffect(() => {
 		async function fetchData() {
+
 			const response = await fetch(
-				`https://api.edamam.com/search?q=${query || "chicken" }&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}`
+				`https://api.edamam.com/search?q=${query || "chicken" }&app_id=${REACT_APP_API_ID}&app_key=${REACT_APP_API_KEY}`
 			);
 			const data = await response.json();
 			fetchItems(data.hits.filter((arr, index) => (index > 8 ? false : true)));
 			setError(() => false);
 		}
-		fetchData().catch(() => {
+		fetchData().catch((err) => {
 			setError(() => true);
 		});
 	}, [loadStatus]);
